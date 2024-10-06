@@ -1,0 +1,74 @@
+Action,Alternative,Units (g/xxx),Carbon per unit of use,Amount
+ChatGPT,Local computational resources,request,5,1
+Email,Instant messaging,email,1,0.5
+Zoom,Audio calls ,hour,473,100
+Instant message,Combining thoughts,message,0.6,0.3
+Canvas assignment upload,Batch uploads (combine multiple files),upload,3,1.5
+Note taking,Use local note-taking software,class,1.5,0.5
+Cloud storage/file sharing,Use external hard drive for file storage,upload,3.5,0.5
+Academic streaming (Khan Academy),Download lessons for offline use (Repeated use content),hour,24,10
+Git commit/push,Local repository management,commit/push,1.75,0.5
+Colab,Use local Python environment,hour,17,0.5
+Local coding,Efficient coding to reduce running time,run,0.5,0.3
+Laptop,Use energy-saving settings on laptop,hour,40,20
+Subscription,Cancel unused subscriptions,Amount,100,0
+Smartphone,Use energy-efficient charger,full charge,5,3
+Car (electric),"Public transportation (electric bus)
+",mile,125,70
+Car (gas),Electric vehicle,mile,400,125
+Motorboat,Electric boat,mile,80,70
+Subway,Walking or cycling,mile,70,10
+RideShare,Carpooling or public transport,mile,200,70
+Bicycle, Walking,mile,15,0
+Boat,Sailboat,mile,400,10
+Walking,Continue Walking,mile,0,0
+Plastic bottle,Reusable water bottle,bottle,82,10
+Metal can,Reusable drink container,can,80,10
+Food packaging,Buy in bulk without packaging,item,13,10
+Single-use bags,Cloth reusable bag,bag,28,10
+Take-out container,Reusable food container,container,30,10
+Cardboard boxes,Reusable storage box,box,120,10
+Plastic utensil pack,Reusable utensil set,pack,27,10
+Paper towels,Reusable cloth towel,roll,500,300
+Toilet paper,Bidet,roll,300,200
+Disposable utensils,Reusable utensils,utensil,2,0.2
+Plastic straws,Metal or bamboo straw,straw,1,0.2
+Electricity usage,Renewable energy sources,kWh,450,100
+Toothbrush,Bamboo toothbrush,toothbrush,30,10
+Makeup,Refillable and natural makeup products,product,100,70
+Masks,Reusable cloth mask,mask,3,1
+Long showers,Short showers,minute,80,15
+Washing your hands (running water),Turn off tap while scrubbing,minute,125,75
+Stove (Gas),Induction stove,minute,1,0.8
+Stove (Induction),Induction stove,minute,0.2,0.2
+Heating (natural gas),Electric heat pump,hour,"1,000",800
+Cooling (air conditioners),Ceiling fan,hour,500,200
+Fan,Continue fan use,hour,20,0
+Refrigerator,Energy-efficient refrigerator,day,"1,000",800
+Drying Clothes,Air-drying clothes,load,600,100
+Washing machine,lower temperature wash,load,600,100
+Oven,Use toaster oven or microwave,hour,"2,000",1500
+TV,Watch on a tablet,hour,90,60
+Microwave,Stovetop heating,minute,275,175
+Lightbulb (normal),LED lightbulb,hour,44,10
+Lightbulb (LED),Use natural light during the day,hour,0.8,0.5
+Food waste,Plan meals to avoid waste,kg,800,600
+Flushing toilet,Use dual-flush toilets,flush,1.25,0.8
+Ironing,Use a clothes steamer,minute,5,2
+Air-drying clothes,Continue air-drying but use outdoor space,load,50,0
+Gardening & Outdoors:,,,,
+Lawn mowing (gas) ,Electric lawn mower or push reel mower,minute,20,5
+Watering garden,Use a rain barrel to collect water,minute ,15,10
+Growing herbs/vegetables, Grow using hydroponics,minute,0,0
+"Waste Management:
+",,,,
+Recycling plastic,Avoid plastic use altogether (use alternatives),kg,0,0
+Recycling glass,Repurpose glass items for storage or decor,kg,0,0
+Composting organic waste,Continue composting,kg,0,0
+E-waste disposal,Donate working electronics,item,0,0
+Textile recycling,Donate or repurpose old clothing,kg,0,0
+Social & Leisure:,,,,
+Books ,Borrow books from a library,book,1000,0
+E-books,Borrow e-books from a digital library,download,10,4
+Video Game,Play outdoor games or board games,hour,120,0
+Concert,Go to local concerts,mile,400,0

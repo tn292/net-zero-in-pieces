@@ -1,0 +1,62 @@
+Action,Carbon per unit of use,Why this has carbon footprint
+Online tools,,
+ChatGPT,5,"Servers and data centers require electricity, contributing to carbon emissions based on energy use."
+Email,1,"Email servers and the energy required to store, send, and receive data contribute to the carbon footprint."
+Zoom,473,"Video conferencing relies on significant server energy for data streaming and transmission, which requires electricity."
+Instant message,0.6,"Short messages also require server resources, though minimal, to transmit and store data."
+Canvas assignment upload,3,"Uploading data requires server processing and storage, consuming energy."
+Note taking,1.5,"Digital note-taking apps store data on cloud services, which require server electricity."
+Cloud storage/file sharing,3.5,"Cloud storage relies on servers, which are powered by electricity, and storing large files increases energy demand."
+Academic streaming (Khan Academy),24,Streaming video content uses a large amount of data transfer and server energy for real-time delivery.
+Git commit/push,1.75,"Every commit and data push to repositories uses server resources, contributing to carbon emissions."
+Colab,17,"Cloud-based coding platforms consume significant computing resources, requiring energy to run servers."
+Local coding,0.5,"Running code locally consumes less energy compared to cloud servers, but still uses electricity."
+Laptop,40,"Powering a laptop requires electricity, which contributes to the carbon footprint depending on the energy source."
+Subscription,100,Maintaining online subscriptions requires server resources that are continuously consuming energy.
+Smartphone,5,"Charging a smartphone uses electricity, contributing to a small but regular carbon footprint."
+Transportation,,
+Car (electric),125,"While electric cars emit no direct emissions, electricity production (if from non-renewable sources) still contributes to carbon emissions."
+Car (gas),400,"Gas-powered vehicles burn fossil fuels directly, releasing carbon dioxide into the atmosphere."
+Motorboat,80,"Motorboats burn fuel, leading to carbon emissions similar to cars, but often less efficient."
+Subway,70,"Public transport like subways uses electricity, but per person, it's much more efficient than cars."
+RideShare,200,"Ride-share cars contribute emissions, particularly if they are gas-powered. Also includes extra driving between passengers."
+Bicycle,15,"Bicycle use has a minimal carbon footprint, though the production of the bike and maintenance adds a small amount."
+Boat,400,"Boats, especially large ones, burn significant amounts of fuel, emitting carbon dioxide."
+Walking,10,"Walking has an extremely low carbon footprint, but producing shoes and clothing involves emissions."
+Disposables,,
+Plastic bottle,82,"Producing plastic from petroleum, then transporting and disposing of it, creates emissions."
+Metal can,80,"Aluminum production is energy-intensive, involving mining, refining, and transport."
+Food packaging,13,"Packaging materials, especially plastic, have a carbon footprint from production and disposal."
+Single-use bags,28,Plastic bags are petroleum-based and generate emissions during production and decomposition.
+Take-out container,30,"Take-out containers, especially single-use, involve emissions from production and disposal."
+Cardboard boxes,120,"Paper production and transport involve significant energy use, contributing to emissions."
+Plastic utensil pack,27,Disposable plastic utensils are derived from petroleum and contribute to waste and emissions in production.
+Toiletries/hygiene,,
+Paper towels,500,"Paper production requires large amounts of energy, water, and chemicals, contributing to a high carbon footprint."
+Toilet paper,300,"Like paper towels, toilet paper production is energy-intensive, contributing to emissions."
+Disposable utensils,2,"Made from plastic, disposable utensils have a carbon footprint from material production to waste disposal."
+Plastic straws,1,Straws are petroleum-based and generate emissions from production and waste.
+Electricity usage,450,"Electricity, especially from non-renewable sources, contributes to carbon emissions through power plants."
+Toothbrush,30,"Plastic toothbrushes require petroleum for production, and disposal adds to landfill waste."
+Makeup,100,"Makeup production involves chemicals and packaging, contributing to carbon emissions."
+Masks,3,Single-use masks are often made of plastic materials and contribute to waste and emissions.
+Long showers,80,"Heating water for long periods consumes energy, increasing the carbon footprint."
+Washing your hands (running water),125,"Running water requires energy for heating and water treatment, adding to emissions."
+Home,,
+Stove (Gas),1,"Gas stoves burn natural gas, releasing carbon dioxide during use."
+Stove (Induction),0.2,"Induction stoves use electricity more efficiently, producing fewer emissions compared to gas."
+Heating (natural gas),"1,000","Natural gas heating produces significant emissions, as burning gas releases carbon dioxide."
+Cooling (air conditioners),500,"Air conditioners consume a lot of electricity, contributing to emissions depending on the power source."
+Fan,20,Fans use less electricity than air conditioners but still contribute to the overall energy demand.
+Refrigerator,"1,000","Refrigerators are continuously powered, consuming electricity 24/7, leading to a higher carbon footprint."
+Drying Clothes,600,"Dryers use electricity to generate heat, contributing significantly to carbon emissions."
+Washing machine,600,"Washing machines use both electricity and water, adding to the carbon footprint."
+Oven,"2,000","Ovens, especially electric ones, consume large amounts of electricity to maintain high heat."
+TV,90,"Televisions require electricity, contributing to carbon emissions during use."
+Microwave,275,"Microwaves consume electricity to generate heat quickly, increasing emissions."
+Lightbulb (normal),44,"Traditional incandescent bulbs are energy-inefficient, consuming more electricity than LEDs."
+Lightbulb (LED),0.8,"LEDs are much more energy-efficient, leading to a lower carbon footprint compared to traditional bulbs."
+Food waste,800,"Decomposing food waste in landfills generates methane, a potent greenhouse gas, contributing significantly to emissions."
+Flushing toilet,1.25,"Water treatment and sewage systems require energy, adding to the carbon footprint of each flush."
+Ironing,5,"Irons consume electricity, contributing to carbon emissions depending on how the electricity is generated."
+Air-drying clothes,50,"Air-drying avoids using electricity, making it a much lower-carbon alternative to electric dryers."

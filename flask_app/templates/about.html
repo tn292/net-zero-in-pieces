@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Info</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,800&family=Sarpanch:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Basic layout for two sides */
+    body {
+      font-family: "JetBrains Mono", monospace;
+      margin: 0px 0px 0px 90px;
+    }
+
+    .tab-bar {
+      background-color: black;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      /* Align the buttons to the right */
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 50px;
+      z-index: 100;
+    }
+
+    .tab-bar a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      margin-left: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Hover effect for the buttons */
+    /* .tab-bar a:hover {
+      background-color: #333;
+      border-radius: 5px;
+    } */
+
+    /* Active page link (e.g., purple text) */
+    .tab-bar a.active {
+      color: #7756db;
+    }
+
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .left-side,
+    .right-side {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .left-side {
+      background-color: #ffffff;
+      flex-direction: column;
+    }
+
+    .right-side {
+      background-color: #ffffff;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-top: 100px;
+    }
+
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #7756db;
+      z-index: 10;
+    }
+
+    .left-arrow {
+      left: 10%;
+    }
+
+    .right-arrow {
+      right: 10%;
+    }
+
+    .carousel-image {
+      width: 20%;
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .carousel-label {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .carousel {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 10%;
+      z-index: 101;
+      /* Adjust the size as needed */
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="tab-bar">
+    <a href="/" class="{% if request.path == '/' %}active{% endif %}">Game</a>
+    <a href="/about" class="{% if request.path == '/about' %}active{% endif %}">About</a>
+    <a href="/info" class="{% if request.path == '/info' %}active{% endif %}">Info</a>
+  </div>
+  <img class="logo" src="{{ url_for('static', filename='../static/logo.png') }}" alt="Logo">
+
+  <div class="container">
+    <!-- Left side content -->
+    <div class="left-side">
+      <h2 style='color: rgba(62, 14, 237, 0.93)'>Our Mission</h2>
+      <p>Net Zero in Pieces is an interactive experience that inspires action towards a sustainable future. By
+        visualizing the journey to net zero, we empower individuals to make meaningful lifestyle changes that
+        collectively contribute to a healthier planet.</p>
+
+      <h2 style='color: rgba(62, 14, 237, 0.93)'>Our Approach</h2>
+      <p>Through engaging animations, we illustrate the environmental impact of personal actions, providing customized
+        recommendations based on daily habits. This journey helps individuals see how small changes can lead to
+        significant progress.</p>
+
+      <h2 style='color: rgba(62, 14, 237, 0.93)'>Our Vision</h2>
+      <p>We envision a future where individuals and communities achieve net zero together, making sustainability
+        accessible, fun, and impactful.</p>
+
+      <h2 style='color: rgba(62, 14, 237, 0.93)'>Join the Movement</h2>
+      <p>Begin your journey towards a net-zero lifestyle. Set personal sustainability goals, explore our interactive
+        map, and connect with a community committed to creating a better world.</p>
+    </div>
+
+    <!-- Right side with three separate carousels -->
+    <div class="right-side">
+
+      <!-- First Carousel -->
+      <div class="carousel-label">Character: Daniela</div>
+      <div class="carousel-container">
+        <button class="carousel-arrow left-arrow" onclick="previousImage(0)">&#8249;</button>
+        <img class="carousel-image active" src="{{ url_for('static', filename='../static/daniela.png') }}"
+          alt="Daniela">
+        <img class="carousel-image" src="{{ url_for('static', filename='../static/character2.png') }}" alt="Dani">
+        <button class="carousel-arrow right-arrow" onclick="nextImage(0)">&#8250;</button>
+      </div>
+
+      <!-- Second Carousel -->
+      <div class="carousel-label">Character: Jean-Luc</div>
+      <div class="carousel-container">
+        <button class="carousel-arrow left-arrow" onclick="previousImage(1)">&#8249;</button>
+        <img class="carousel-image active" src="{{ url_for('static', filename='../static/jean.png') }}" alt="Jean">
+        <img class="carousel-image" src="{{ url_for('static', filename='../static/character1.png') }}" alt="Jean-Luc">
+        <button class="carousel-arrow right-arrow" onclick="nextImage(1)">&#8250;</button>
+      </div>
+
+      <!-- Third Carousel -->
+      <div class="carousel-label">Character: Tejal</div>
+      <div class="carousel-container">
+        <button class="carousel-arrow left-arrow" onclick="previousImage(2)">&#8249;</button>
+        <img class="carousel-image active" src="{{ url_for('static', filename='../static/tejal.png') }}" alt="Tejal">
+        <img class="carousel-image" src="{{ url_for('static', filename='../static/character3.png') }}" alt="Taj">
+        <button class="carousel-arrow right-arrow" onclick="nextImage(2)">&#8250;</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const carousels = document.querySelectorAll('.carousel-container');
+
+    function showImage(carouselIndex, imageIndex) {
+      const images = carousels[carouselIndex].querySelectorAll('.carousel-image');
+      images.forEach(img => img.classList.remove('active'));
+      images[imageIndex].classList.add('active');
+    }
+
+    function nextImage(carouselIndex) {
+      const images = carousels[carouselIndex].querySelectorAll('.carousel-image');
+      let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(carouselIndex, currentIndex);
+    }
+
+    function previousImage(carouselIndex) {
+      const images = carousels[carouselIndex].querySelectorAll('.carousel-image');
+      let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(carouselIndex, currentIndex);
+    }
+  </script>
+
+</body>
+
+</html>

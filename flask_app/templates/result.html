@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Breakdown</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sarpanch:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Basic layout for two sides */
+
+    body {
+      font-family: "JetBrains Mono", monospace;
+      /* Sets the font across the whole page */
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      /* margin-top: 80px; */
+    }
+
+    .left-side,
+    .right-side {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .left-side {
+      background-color: #ffffff;
+      flex-direction: column;
+    }
+
+    .right-side {
+      background-color: #ffffff;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-top: 100px;
+    }
+
+
+
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .result-table th,
+    .result-table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .result-table th {
+      background-color: #f4f4f4;
+    }
+
+    /* Style for the tab bar */
+    .tab-bar {
+      background-color: black;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      /* Align the buttons to the right */
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 50px;
+      z-index: 100;
+    }
+
+    .tab-bar a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      margin-left: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Hover effect for the buttons */
+    /* .tab-bar a:hover {
+      background-color: #333;
+      border-radius: 5px;
+    } */
+
+    /* Active page link (e.g., purple text) */
+    .tab-bar a.active {
+      color: #7756db;
+    }
+
+    /* Style for the form */
+    .form-container {
+      /* position: fixed; */
+      /* top: 200px; */
+      /* left: 300px; */
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      z-index: 102;
+    }
+
+    .form-container input[type="text"] {
+      margin-top: 10px;
+      padding: 10px;
+      width: 100%;
+      font-size: 18px;
+      border: 2px solid rgb(6, 5, 5);
+      border-radius: 20px;
+    }
+
+    /* .form-container input[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    .form-container input[type="submit"]:hover {
+      background-color: #0056b3;
+    } */
+
+    .next-button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    #next-button {
+      padding: 12px 24px;
+      /* Padding for a larger, clickable button */
+      background-color: #7756db;
+      /* Primary blue color for visibility */
+      color: white;
+      /* White text for contrast */
+      font-size: 18px;
+      /* Font size to make text easily readable */
+      border: none;
+      /* Remove default borders */
+      border-radius: 18px;
+      /* Rounded corners for a modern look */
+      cursor: pointer;
+      /* Pointer cursor to indicate interactivity */
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      /* Smooth transition for hover effects */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      /* Subtle shadow for depth */
+    }
+
+    #next-button:hover {
+      background-color: #0056b3;
+      /* Darker blue on hover */
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+      /* Deeper shadow on hover */
+    }
+
+    #next-button i {
+      font-size: 20px;
+      /* Size of the icon */
+    }
+
+    /* Different styles for each image */
+    #selected-character {
+      width: 45%;
+      height: auto;
+
+    }
+
+    .image2-container {
+      position: relative;
+      width: 90%;
+    }
+
+    .image2 {
+      width: 90%;
+      height: auto;
+
+    }
+
+    .table-container {
+      /* position: relative; */
+      width: 100%;
+      /* max-width: 800px; */
+      /* You can adjust the width based on your layout */
+      margin: 0 auto;
+      /* Center the table */
+      /* padding: 0; */
+      /* No padding to ensure it stays at the top */
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      opacity: 0;
+      pointer-events: none;
+      /* Ensure the overlay doesn't block interactions */
+      mask-image: '../static/world-map.png';
+      /* Use the image transparency as a mask */
+      mask-size: cover;
+      mask-repeat: no-repeat;
+    }
+
+
+    .result-textbox {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 18px;
+      width: 300px;
+      height: auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+
+    .result-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      /* Full width to accommodate both columns */
+      margin-top: 20px;
+      background-color: #f0f0f0;
+      /* Light gray background for visibility */
+      padding: 10px;
+      /* Padding for aesthetics */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      /* Subtle shadow for depth */
+      border-radius: 5px;
+      /* Rounded corners for a softer look */
+      position: relative;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      /* Ensure each row uses the full width */
+      margin-top: 5px;
+      /* Margin between rows */
+    }
+
+    .result-title,
+    .result-unit {
+      flex: 1;
+      /* Each takes up half the space */
+    }
+
+    .result-input {
+      width: 50px;
+      /* Fixed width for inputs */
+      margin-left: 10px;
+      /* Space between the unit text and the input */
+    }
+
+    input,
+    select {
+      padding: 5px;
+      margin: 0 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 10%;
+      z-index: 101;
+      /* Adjust the size as needed */
+    }
+  </style>
+</head>
+
+<body>
+  <img class="logo" src="{{ url_for('static', filename='../static/logo.png') }}" alt="Logo">
+  <div class="tab-bar">
+    <a href="/" class="{% if request.path == '/' %}active{% endif %}">Game</a>
+    <a href="/about" class="{% if request.path == '/about' %}active{% endif %}">About</a>
+    <a href="/info" class="{% if request.path == '/info' %}active{% endif %}">Info</a>
+  </div>
+
+  <div class="container">
+    <!-- Left side with a text box and submit button -->
+    <div class="left-side">
+      <h2>Your Breakdown</h2>
+      <canvas id="categoryChart"></canvas>
+
+      <div class="next-button-container">
+        <button id="next-button" onclick="window.location.href='/rec'">
+          Next <i class="fas fa-arrow-right"></i> <!-- Font Awesome icon for arrow -->
+        </button>
+      </div>
+    </div>
+
+
+    <!-- Right side with two images -->
+    <div class="right-side">
+      <img id="selected-character" src="{{ selected_image }}" alt="Selected Character">
+
+      <!-- <img class="image2" src="{{ url_for('static', filename='../static/world-map.png') }}" alt="Image 2"> -->
+
+      <img class="image2" id="image-2" src="{{ url_for('static', filename='../static/world-map.png') }}" alt="Image 2"
+        style="width: 90%; filter: brightness(1);">
+      <!-- Black overlay to shade the second image -->
+      <!-- <div class="overlay" id="image-overlay"
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: black; opacity: 0; mix-blend-mode: multiply;">
+        </div> -->
+
+    </div>
+  </div>
+  </div>
+
+  <!-- <script>
+    let totalImpactScore = 0;
+
+    document.getElementById('categorization-form').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent the form from submitting the traditional way
+      const userInput = document.getElementById('user_input').value;
+
+      // Send the user input to the Flask backend using fetch
+      fetch('/categorize', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({ user_input: userInput })
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Create a new result box dynamically and insert it into the DOM
+          let resultText = document.getElementById('result-text');
+          resultText.innerHTML += `<br>${userInput}`;
+
+          // Append the result box to the result-container div
+          // document.getElementById('result-container').appendChild(resultBox);
+
+          // Clear the input field for further entries
+          document.getElementById('user_input').value = '';
+
+          totalImpactScore += data.impact_score;
+
+          // Cap the opacity at 1 (100%)
+          const normalizedOpacity = Math.min(totalImpactScore / 100, 1);
+          document.getElementById('image-overlay').style.opacity = normalizedOpacity;
+
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
+  </script> -->
+  <script>
+    // Get the category data from the server
+    const categoryCounts = {{ category_counts | tojson }};
+
+    // Extract category labels and their counts
+    const labels = Object.keys(categoryCounts);
+    const data = Object.values(categoryCounts);
+
+    // Create a bar chart using Chart.js
+    const ctx = document.getElementById('categoryChart').getContext('2d');
+    const categoryChart = new Chart(ctx, {
+      type: 'bar',  // Set chart type to bar
+      data: {
+        labels: labels,  // Category names
+        datasets: [{
+          label: 'Number of Items',
+          data: data,  // Number of items in each category
+          backgroundColor: 'rgba(69, 4, 245, 0.8)', // Bar color
+          borderColor: 'rgba(69, 4, 245, 0.8)',  // Bar border color
+          borderWidth: 1
+        }]
+      },
+      options: {
+        indexAxis: 'y',  // Display the bars horizontally
+        scales: {
+          x: {
+            beginAtZero: true  // Start x-axis at zero
+          }
+        }
+      }
+    });
+  </script>
+
+
+</body>
+
+</html>

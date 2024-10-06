@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item Categorization</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sarpanch:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* Basic layout for two sides */
+
+    body {
+      font-family: "JetBrains Mono", monospace;
+      /* Sets the font across the whole page */
+      margin: 0px 0px 0px 90px;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      /* margin-top: 80px; */
+    }
+
+    .left-side,
+    .right-side {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .left-side {
+      background-color: #ffffff;
+      flex-direction: column;
+    }
+
+    .right-side {
+      background-color: #ffffff;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-top: 100px;
+    }
+
+
+
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .result-table th,
+    .result-table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .result-table th {
+      background-color: #f4f4f4;
+    }
+
+    /* Style for the tab bar */
+    .tab-bar {
+      background-color: black;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      /* Align the buttons to the right */
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 50px;
+      z-index: 100;
+    }
+
+    .tab-bar a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      margin-left: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Hover effect for the buttons */
+    /* .tab-bar a:hover {
+      background-color: #333;
+      border-radius: 5px;
+    } */
+
+    /* Active page link (e.g., purple text) */
+    .tab-bar a.active {
+      color: #7756db;
+    }
+
+
+    /* Style for the form */
+    .form-container {
+      /* position: fixed; */
+      /* top: 200px; */
+      /* left: 300px; */
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      z-index: 102;
+    }
+
+    .form-container input[type="text"] {
+      margin-top: 10px;
+      padding: 10px;
+      width: 100%;
+      font-size: 18px;
+      border: 2px solid rgb(6, 5, 5);
+      border-radius: 20px;
+    }
+
+    /* .form-container input[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    .form-container input[type="submit"]:hover {
+      background-color: #0056b3;
+    } */
+
+    .next-button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    #next-button {
+      padding: 12px 24px;
+      /* Padding for a larger, clickable button */
+      background-color: #7756db;
+      /* Primary blue color for visibility */
+      color: white;
+      /* White text for contrast */
+      font-size: 18px;
+      /* Font size to make text easily readable */
+      border: none;
+      /* Remove default borders */
+      border-radius: 18px;
+      /* Rounded corners for a modern look */
+      cursor: pointer;
+      /* Pointer cursor to indicate interactivity */
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      /* Smooth transition for hover effects */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      /* Subtle shadow for depth */
+    }
+
+    #next-button:hover {
+      background-color: #0056b3;
+      /* Darker blue on hover */
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+      /* Deeper shadow on hover */
+    }
+
+    #next-button i {
+      font-size: 20px;
+      /* Size of the icon */
+    }
+
+    /* Different styles for each image */
+    #selected-character {
+      width: 45%;
+      height: auto;
+
+    }
+
+    .image2-container {
+      position: relative;
+      width: 90%;
+    }
+
+    .image2 {
+      width: 90%;
+      height: auto;
+
+    }
+
+    .table-container {
+      /* position: relative; */
+      width: 90%;
+      /* max-width: 800px; */
+      /* You can adjust the width based on your layout */
+      margin: 0 auto;
+      /* Center the table */
+      /* padding: 0; */
+      /* No padding to ensure it stays at the top */
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      border-radius: 18px;
+      border: 2px solid #ccc;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      opacity: 0;
+      pointer-events: none;
+      /* Ensure the overlay doesn't block interactions */
+      mask-image: '../static/world-map.png';
+      /* Use the image transparency as a mask */
+      mask-size: cover;
+      mask-repeat: no-repeat;
+    }
+
+
+    .result-textbox {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 18px;
+      width: 300px;
+      height: auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+
+    .result-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      /* Full width to accommodate both columns */
+      margin-top: 20px;
+      background-color: #f0f0f0;
+      /* Light gray background for visibility */
+      padding: 10px;
+      /* Padding for aesthetics */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      /* Subtle shadow for depth */
+      border-radius: 5px;
+      /* Rounded corners for a softer look */
+      position: relative;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      /* Ensure each row uses the full width */
+      margin-top: 5px;
+      /* Margin between rows */
+    }
+
+    .result-title,
+    .result-unit {
+      flex: 1;
+      /* Each takes up half the space */
+    }
+
+    .result-input {
+      width: 50px;
+      /* Fixed width for inputs */
+      margin-left: 10px;
+      /* Space between the unit text and the input */
+    }
+
+    input,
+    select {
+      padding: 5px;
+      margin: 0 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 10%;
+      z-index: 101;
+      /* Adjust the size as needed */
+    }
+  </style>
+</head>
+
+<body>
+  <img class="logo" src="{{ url_for('static', filename='../static/logo.png') }}" alt="Logo">
+  <div class="tab-bar">
+    <a href="/" class="{% if request.path == '/' %}active{% endif %}">Game</a>
+    <a href="/about" class="{% if request.path == '/about' %}active{% endif %}">About</a>
+    <a href="/info" class="{% if request.path == '/info' %}active{% endif %}">Info</a>
+  </div>
+
+  <div class="container">
+    <!-- Left side with a text box and submit button -->
+    <div class="left-side">
+
+      <!-- This div will hold the categorized result dynamically -->
+      <!-- <div id="result-container"></div> -->
+      <!-- <input type="text" id="item_name" placeholder="Item Name" readonly style="width: 50%;">
+      <input type="number" id="item_unit" placeholder="Units" value="1" style="width: 50%;"> -->
+      <div class="table-container">
+        <table id="result-table" class="result-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Unit</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Items will be added here dynamically -->
+          </tbody>
+        </table>
+      </div>
+      <form class="form-container" id="categorization-form">
+        <p style="font-size:30px">Add daily items used in actions.</p>
+        <p style="font-size:15px">Example: watching TV -> enter TV</p>
+        <input type="text" name="user_input" id="user_input" placeholder="Enter some items..." required>
+        <!-- <input type="submit" value="Submit"> -->
+      </form>
+
+      <div class="next-button-container">
+        <button id="next-button">
+          NEXT <i class="fas fa-arrow-right"></i> <!-- Font Awesome icon for arrow -->
+        </button>
+      </div>
+      <p style='font-style: italic'>Note: Click info tab to find out further information </p>
+    </div>
+
+    <!-- Right side with two images -->
+    <div class="right-side">
+      <img id="selected-character" src="{{ selected_image }}" alt="Selected Character">
+
+      <!-- <img class="image2" src="{{ url_for('static', filename='../static/world-map.png') }}" alt="Image 2"> -->
+
+      <img class="image2" id="image-2" src="{{ url_for('static', filename='../static/world-map.png') }}" alt="Image 2"
+        style="width: 90%; filter: brightness(1);">
+      <!-- Black overlay to shade the second image -->
+      <!-- <div class="overlay" id="image-overlay"
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: black; opacity: 0; mix-blend-mode: multiply;">
+        </div> -->
+
+    </div>
+  </div>
+  </div>
+
+  <script>
+    let totalCarbonUsage = 0;  // Keep track of total carbon usage
+    let carbonDataMap = new Map();  // Store carbon usage per unit for each item
+
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('categorization-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const userInput = document.getElementById('user_input').value.trim();
+
+        if (userInput) {
+          fetch('/get-item-info', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ user_input: userInput })
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.unit) {
+                const tbody = document.getElementById('result-table').querySelector('tbody');
+                const tr = document.createElement('tr');
+
+                // Create a cell for the item name
+                const tdItem = document.createElement('td');
+                tdItem.textContent = userInput;
+
+                // Create a cell for the unit
+                const tdUnit = document.createElement('td');
+                tdUnit.textContent = data.unit;
+
+                // Create a cell for the quantity (with input)
+                const tdQuantity = document.createElement('td');
+                const inputQuantity = document.createElement('input');
+                inputQuantity.type = 'number';
+                inputQuantity.value = '1';  // Default value set to 1
+                inputQuantity.style.width = '60px';  // Adjust width as necessary
+                tdQuantity.appendChild(inputQuantity);
+
+                // Append all cells to the table row
+                tr.appendChild(tdItem);
+                tr.appendChild(tdUnit);
+                tr.appendChild(tdQuantity);
+                tbody.appendChild(tr);
+                // Clear the input field
+                document.getElementById('user_input').value = '';
+
+                // Fetch the carbon usage from the server
+                fetch('/get-carbon-usage', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  body: new URLSearchParams({ user_input: userInput })
+                })
+                  .then(response => response.json())
+                  .then(carbonData => {
+                    if (carbonData.carbon_usage) {
+                      let carbonPerUnit = parseFloat(carbonData.carbon_usage);
+
+                      // Store the carbon usage per unit for this item
+                      carbonDataMap.set(inputQuantity, carbonPerUnit);
+
+                      // Recalculate total carbon usage whenever the quantity is updated
+                      inputQuantity.addEventListener('input', recalculateCarbonUsage);
+
+                      // Immediately trigger a recalculation for the first time
+                      recalculateCarbonUsage();
+                    } else {
+                      console.error('Carbon usage data not found for this item.');
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Failed to fetch carbon usage data:', error);
+                  });
+              } else {
+                alert('No matching item found');
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              alert('Failed to fetch item details');
+            });
+        } else {
+          alert('Please enter an item name');
+        }
+      });
+
+      // Function to recalculate the total carbon usage whenever any quantity input changes
+      function recalculateCarbonUsage() {
+        console.log('recalculateCarbonUsage triggered');
+        totalCarbonUsage = 0;  // Reset total
+
+        // Loop through all stored items and recalculate based on their quantities
+        carbonDataMap.forEach((carbonPerUnit, inputElement) => {
+          let quantity = parseFloat(inputElement.value) || 1;  // Fallback to 1 if empty or invalid
+          totalCarbonUsage += carbonPerUnit * quantity;
+        });
+
+        // Calculate the brightness based on the total carbon usage
+        const maxBrightnessReduction = 0.;  // Minimum brightness is 40%
+        const normalizedBrightness = Math.max(1 - totalCarbonUsage / 1000, maxBrightnessReduction);
+
+        console.log('Updated total carbon usage:', totalCarbonUsage, 'Brightness:', normalizedBrightness);
+
+        // Update the image's brightness filter
+        document.getElementById('image-2').style.filter = `brightness(${normalizedBrightness})`;
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const nextButton = document.getElementById('next-button');
+
+      // When the "Next" button is clicked, redirect to the result page
+      nextButton.addEventListener('click', function () {
+        window.location.href = '/result';  // Redirects to the /result page
+      });
+    });
+
+
+  </script>
+
+
+</body>
+
+</html>

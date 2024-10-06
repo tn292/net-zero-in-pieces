@@ -1,0 +1,57 @@
+Action,Units (g/xxx),Carbon per unit of use
+ChatGPT,request,5
+Email,email,1
+Zoom,hour,473
+Instant message,message,0.6
+Canvas assignment upload,upload,3
+Note taking,class,1.5
+Cloud storage/file sharing,upload,3.5
+Academic streaming (Khan Academy),hour,24
+Git commit/push,commit/push,1.75
+Colab,hour,17
+Local coding,run,0.5
+Laptop,hour,40
+Subscription,Amount,100
+Smartphone,full charge,5
+Car (electric),mile,125
+Car (gas),mile,400
+Motorboat,mile,80
+Subway,mile,70
+RideShare,mile,200
+Bicycle,mile,15
+Boat,mile,400
+Walking,mile,10
+Plastic bottle,bottle,82
+Metal can,can,80
+Food packaging,item,13
+Single-use bags,bag,28
+Take-out container,container,30
+Cardboard boxes,box,120
+Plastic utensil pack,pack,27
+Paper towels,roll,500
+Toilet paper,roll,300
+Disposable utensils,utensil,2
+Plastic straws,straw,1
+Electricity usage,kWh,450
+Toothbrush,toothbrush,30
+Makeup,product,100
+Masks,mask,3
+Long showers,minute,80
+Washing your hands (running water),minute,125
+Stove (Gas),minute,1
+Stove (Induction),minute,0.2
+Heating (natural gas),hour,"1,000"
+Cooling (air conditioners),hour,500
+Fan,hour,20
+Refrigerator,day,"1,000"
+Drying Clothes,load,600
+Washing machine,load,600
+Oven,hour,"2,000"
+TV,hour,90
+Microwave,minute,275
+Lightbulb (normal),hour,44
+Lightbulb (LED),hour,0.8
+Food waste,kg,800
+Flushing toilet,flush,1.25
+Ironing,minute,5
+Air-drying clothes,load,50

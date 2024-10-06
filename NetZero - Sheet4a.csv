@@ -1,0 +1,72 @@
+Action,Units (g/xxx),Carbon per unit of use
+ChatGPT,request,5
+Email,email,1
+Zoom,hour,473
+"Instant message (Slack, iMessage, discord)",message,0.6
+canvas assignment upload,upload,3
+Note taking,class,1.5
+Cloud storage/file sharing,upload,3.5
+Academic streaming (Khan Academy/YouTube),hour,24
+git commit/push,commit/push,1.75
+Collaborative coding (Colab),hour,17
+Local coding,run,0.5
+Car (electric),mile,125
+Car (gas),mile,400
+Bus,mile,80
+Subway,mile,70
+Boat,mile,400
+Plastic bottle,bottle,82
+Food packaging,item,13
+Single-use bags,bag,10
+Take-out container,container,30
+Cardboard boxes,box,120
+Paper towels,roll,500
+Toilet paper,roll,300
+Disposable utensils,utensil,2
+Plastic straws,straw,1
+Electricity usage,kWh,450
+Coal,kWh,820
+Oil,kWh,780
+Gas,kWh,490
+Heating (natural gas),hour,"1,000"
+Cooling (air conditioners),hour,500
+Fan,hour,20
+Refrigerator,day,"1,000"
+Washing machine,load,600
+Oven,hour,"2,000"
+TV,hour,90
+Computer,hour,40
+Smartphone,charge,2
+Phone,charge,1
+Meat,kg,"20,000"
+Dairy,kg,"1,000"
+Processed food,kg,500
+Imported food,kg,"5,000"
+Food waste,kg,800
+Long showers,minute,80
+Water heaters,hour,300
+Irrigation for agriculture,acre-foot,"5,000"
+Bottled water,liter,200
+Concrete,kg,800
+Steel,kg,"1,800"
+Glass,kg,600
+Insulation,sq. ft.,10
+Wood,kg,300
+Metal,kg,"1,500"
+Urban sprawl,capita,"3,000"
+Fast fashion,garment,"2,500"
+Synthetic fabrics (polyester),kg,"9,000"
+Synthetic fabrics (nylon),kg,"25,000"
+Cotton production,kg,"2,000"
+Fabric,kg,"2,000"
+Leather,kg,"10,000"
+Hotel stay,night,"15,000"
+Cruise,day,"700,000"
+Plane,km,200
+Toothbrush,toothbrush,30
+Makeup,product,100
+Masks,mask,3
+Syringe,syringe,5
+Gloves,pair,5
+Tooth,tooth (filling),200
+Delivery box,delivery,200

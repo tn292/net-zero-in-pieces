@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two Sided Layout with Different Image Sizes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sarpanch:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <style>
+    /* Basic layout for two sides */
+    body {
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      /* margin-top: 500px; */
+      /* margin-top: 80px; */
+    }
+
+    .left-side,
+    .right-side {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .left-side {
+      background-color: #ffffff;
+      flex-direction: column;
+    }
+
+    .right-side {
+      background-color: #ffffff;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-top: 100px;
+    }
+
+    /* Style for the tab bar */
+    .tab-bar {
+      background-color: black;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      /* Align the buttons to the right */
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 50px;
+      z-index: 100;
+    }
+
+    .tab-bar a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      margin-left: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Hover effect for the buttons */
+    /* .tab-bar a:hover {
+      background-color: #333;
+      border-radius: 5px;
+    } */
+
+    /* Active page link (e.g., purple text) */
+    .tab-bar a.active {
+      color: #7756db;
+    }
+
+    /* Style for the button */
+    .start-button {
+      padding: 50px 85px;
+      font-size: 70px;
+      background-color: #050606;
+      color: white;
+      border: none;
+      border-radius: 85px;
+      cursor: pointer;
+      font-family: "Sarpanch", sans-serif;
+    }
+
+    .start-button:hover {
+      background-color: #7411e6;
+    }
+
+    .login-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #4285F4;
+      /* Google Blue */
+      color: white;
+      font-size: 22px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background-color: #357ae8;
+      /* Darker Google Blue */
+    }
+
+    /* Different styles for each image */
+    .image1 {
+      width: 45%;
+      height: auto;
+    }
+
+    .image-carousel-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 400px;
+      /* Limit the size of the carousel to center it properly */
+      margin: 0 auto;
+      /* Center the carousel on the right side */
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 80px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #7756db;
+      /* Set arrow color */
+      z-index: 10;
+    }
+
+    .left-arrow {
+      left: 800px;
+      /* Position the left arrow closer to the carousel */
+    }
+
+    .right-arrow {
+      right: 30px;
+      /* Position the right arrow closer to the carousel */
+    }
+
+    .carousel-image {
+      width: 300px;
+      height: auto;
+    }
+
+    .image2 {
+      width: 90%;
+      height: auto;
+      margin-top: 0;
+    }
+
+    .start-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /* margin-top: 20px; */
+      /* Optional, to adjust spacing */
+    }
+
+    .logo {
+      width: 60%;
+      height: auto;
+    }
+  </style>
+
+  <script>
+    function openNewScreen() {
+      // Redirect to a new page, for example "/new-page"
+      window.location.href = "/new-page"; // Change this to your desired route
+    }
+  </script>
+</head>
+
+<body>
+
+  <div class="tab-bar">
+    <a href="/" class="{% if request.path == '/' %}active{% endif %}">Game</a>
+    <a href="/about" class="{% if request.path == '/about' %}active{% endif %}">About</a>
+    <a href="/info" class="{% if request.path == '/info' %}active{% endif %}">Info</a>
+  </div>
+
+  <div class="container">
+    <!-- Left side with the button -->
+    <div class="left-side">
+      <form id="startForm" action="/new-page" method="POST">
+        <input type="hidden" name="selected_image" id="selectedImageInput">
+        <div class="start-container">
+          <img class="logo" src="{{ url_for('static', filename='../static/netzero.png') }}" alt="Logo">
+          <button type="submit" class="start-button">START</button>
+        </div>
+      </form>
+
+      <!-- Login with Google Button -->
+      <!-- <a href="{{ url_for('login') }}" class="login-btn">Log in with Google</a> -->
+    </div>
+
+    <!-- Right side with two images -->
+    <div class="right-side">
+      <div class="image-carousel">
+        <button class="carousel-arrow left-arrow" onclick="previousImage()">&#8249;</button>
+
+        <img src="{{ url_for('static', filename='../static/character1.png') }}" alt="Image 1a" class="carousel-image">
+        <img src="{{ url_for('static', filename='../static/character2.png') }}" alt="Image 1b" class="carousel-image"
+          style="display:none;">
+        <img src="{{ url_for('static', filename='../static/character3.png') }}" alt="Image 1c" class="carousel-image"
+          style="display:none;">
+
+        <button class="carousel-arrow right-arrow" onclick="nextImage()">&#8250;</button>
+      </div>
+      <!-- <form id="startForm" action="/new-page" method="POST">
+        <input type="hidden" name="selected_image" id="selectedImageInput">
+      </form> -->
+
+      <img class="image2" src="{{ url_for('static', filename='../static/world-map.png') }}" alt="Image 2">
+
+
+    </div>
+
+
+  </div>
+
+  <script>
+    let currentImageIndex = 0;
+    const images = document.querySelectorAll('.carousel-image');
+
+    function showImage(index) {
+      images.forEach(img => img.style.display = 'none');
+      images[index].style.display = 'block';
+      document.getElementById('selectedImageInput').value = images[index].src; // Save selected image in hidden input
+    }
+
+    function nextImage() {
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      showImage(currentImageIndex);
+    }
+
+    function previousImage() {
+      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      showImage(currentImageIndex);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      showImage(currentImageIndex); // Initialize carousel with the first image visible
+    });
+
+    function openNewScreen() {
+      const selectedImageInput = document.getElementById('selectedImageInput');
+
+      // Default to character1 if no image selected
+      if (!selectedImageInput.value) {
+        selectedImageInput.value = "{{ url_for('static', filename='../static/character1.png') }}";
+      }
+
+      document.getElementById('startForm').submit();  // Submit form
+    }
+
+
+  </script>
+
+</body>
+
+</html>
